@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.20)
+project(matrix_class)
+include_directories(../inc)
+add_executable(run_matrix ../src/main.cpp)
+target_compile_options(run_matrix PRIVATE -Wall -Werror)
+set_target_properties(run_matrix PROPERTIES RUNTIME_OUTPUT_DIRECTORY ../)
+set_property(TARGET run_matrix PROPERTY CXX_STANDARD 17 C_STANDARD C99)
