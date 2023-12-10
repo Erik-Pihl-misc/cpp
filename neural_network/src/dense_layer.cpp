@@ -53,7 +53,7 @@ void DenseLayer::feedforward(const std::vector<double>& input) {
 }
 
 void DenseLayer::backpropagate(const std::vector<double>& reference) {
-    for (std::size_t i{}; i < numNodes(); ++i) {
+    for (std::size_t i{}; i < numNodes() && i < reference.size(); ++i) {
         const double error = reference[i] - output_[i];
         error_[i] = error * getActFuncDelta(output_[i], act_func_);
     }
