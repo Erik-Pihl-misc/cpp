@@ -1,3 +1,8 @@
+/********************************************************************************
+ * @brief Implementation details for the container::Vector class.
+ * 
+ * @note Don't include this file directly.
+ ********************************************************************************/
 #pragma once 
 
 namespace container
@@ -109,6 +114,35 @@ template <typename T>
 typename Vector<T>::ConstIterator Vector<T>::end() const 
 { 
     return ConstIterator{myData + mySize};
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+typename Vector<T>::Iterator Vector<T>::rbegin() 
+{ 
+    return mySize > 0 ? Iterator{myData + mySize - 1} : Iterator{nullptr}; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+typename Vector<T>::ConstIterator Vector<T>::rbegin() const 
+{ 
+    return mySize > 0 ? ConstIterator{myData + mySize - 1} : ConstIterator{nullptr}; 
+}
+
+
+// -----------------------------------------------------------------------------
+template <typename T>
+typename Vector<T>::Iterator Vector<T>::rend() 
+{ 
+    return mySize > 0 ? Iterator{myData - 1} : Iterator{nullptr};
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+typename Vector<T>::ConstIterator Vector<T>::rend() const 
+{ 
+    return mySize > 0 ? ConstIterator{myData - 1} : ConstIterator{nullptr};
 }
 
 // -----------------------------------------------------------------------------

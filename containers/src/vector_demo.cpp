@@ -47,7 +47,8 @@ int main()
     v1 += {11, 12, 13, 14, 15};
     v2.resize(5);
 
-    for (auto& i : v2) {
+    for (auto& i : v2) 
+    {
         i = num += 0.5;
     }
 

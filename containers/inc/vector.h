@@ -165,6 +165,34 @@ public:
     ConstIterator end() const;
 
     /********************************************************************************
+     * @brief Provides the address of the last element of the vector.
+     *
+     * @return Iterator pointing at the last element of the vector.
+     ********************************************************************************/
+    Iterator rbegin();
+
+    /********************************************************************************
+     * @brief Provides the address of the last element of the vector.
+     *
+     * @return Iterator pointing at the last element of the vector.
+     ********************************************************************************/
+    ConstIterator rbegin() const;
+
+    /********************************************************************************
+     * @brief Provides the address of the first element of the vector.
+     *
+     * @return Iterator pointing at the first element of the vector.
+     ********************************************************************************/
+    Iterator rend();
+
+    /********************************************************************************
+     * @brief Provides the address of the first element of the vector.
+     *
+     * @return Iterator pointing at the first element of the vector.
+     ********************************************************************************/
+    ConstIterator rend() const;
+
+    /********************************************************************************
      * @brief Returns the address of the last element of the vector.
      *
      * @return Pointer to the last element of the vector.
