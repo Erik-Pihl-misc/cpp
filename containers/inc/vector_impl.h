@@ -88,19 +88,28 @@ bool Vector<T>::empty() const { return mySize == 0; }
 
 // -----------------------------------------------------------------------------
 template <typename T>
-T* Vector<T>::begin() { return myData; }
+typename Vector<T>::Iterator Vector<T>::begin() { return Iterator{myData}; }
 
 // -----------------------------------------------------------------------------
 template <typename T>
-const T* Vector<T>::begin() const { return myData; }
+typename Vector<T>::ConstIterator Vector<T>::begin() const 
+{ 
+    return ConstIterator{myData};
+}
 
 // -----------------------------------------------------------------------------
 template <typename T>
-T* Vector<T>::end() { return myData + mySize; }
+typename Vector<T>::Iterator Vector<T>::end() 
+{ 
+    return Iterator{myData + mySize}; 
+}
 
 // -----------------------------------------------------------------------------
 template <typename T>
-const T* Vector<T>::end() const { return myData + mySize; }
+typename Vector<T>::ConstIterator Vector<T>::end() const 
+{ 
+    return ConstIterator{myData + mySize};
+}
 
 // -----------------------------------------------------------------------------
 template <typename T>
@@ -216,6 +225,201 @@ bool Vector<T>::addValues(const T (&values)[NumValues])
     if (!resize(mySize + NumValues)) { return false; }
     assign(values, offset);
     return true;
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+Vector<T>::Iterator::Iterator() = default;
+
+// -----------------------------------------------------------------------------
+template <typename T>
+Vector<T>::Iterator::Iterator(T& data) : myData{&data} {}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+Vector<T>::Iterator::Iterator(T* data) : myData{data} {}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+void Vector<T>::Iterator::operator++() { myData++; }
+
+// -----------------------------------------------------------------------------
+template <typename T>
+void Vector<T>::Iterator::operator--() { myData--; }
+
+// -----------------------------------------------------------------------------
+template <typename T>
+void Vector<T>::Iterator::operator++(int) { myData++; }
+
+// -----------------------------------------------------------------------------
+template <typename T>
+void Vector<T>::Iterator::operator--(int) { myData--; }
+
+// -----------------------------------------------------------------------------
+template <typename T>
+void Vector<T>::Iterator::operator+=(const std::size_t numIncrements)
+{
+    for (std::size_t i{}; i < numIncrements; ++i) { myData++; }
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+void Vector<T>::Iterator::operator-=(const std::size_t numIncrements)
+{
+    for (std::size_t i{}; i < numIncrements; ++i) { myData--; }
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+bool Vector<T>::Iterator::operator==(const Iterator& other) const
+{ 
+    return myData == other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+bool Vector<T>::Iterator::operator!=(const Iterator& other) const
+{ 
+    return myData != other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+bool Vector<T>::Iterator::operator>(const Iterator& other) const
+{ 
+    return myData > other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+bool Vector<T>::Iterator::operator<(const Iterator& other) const
+{ 
+    return myData < other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+bool Vector<T>::Iterator::operator>=(const Iterator& other) const
+{ 
+    return myData >= other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+bool Vector<T>::Iterator::operator<=(const Iterator& other) const
+{ 
+    return myData >= other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+T& Vector<T>::Iterator::operator*() { return *myData; }
+
+// -----------------------------------------------------------------------------
+template <typename T>
+const T& Vector<T>::Iterator::operator*() const { return *myData; }
+
+// -----------------------------------------------------------------------------
+template <typename T>
+T* Vector<T>::Iterator::operator=(Iterator& iterator) { return myData; }
+
+// -----------------------------------------------------------------------------
+template <typename T>
+const T* Vector<T>::Iterator::operator=(Iterator& iterator) const { return myData; }
+
+// -----------------------------------------------------------------------------
+template <typename T>
+Vector<T>::ConstIterator::ConstIterator() = default;
+
+// -----------------------------------------------------------------------------
+template <typename T>
+Vector<T>::ConstIterator::ConstIterator(const T& data) : myData{&data} {}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+Vector<T>::ConstIterator::ConstIterator(const T* data) : myData{data} {}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+void Vector<T>::ConstIterator::operator++() { myData++; }
+
+// -----------------------------------------------------------------------------
+template <typename T>
+void Vector<T>::ConstIterator::operator--() { myData--; }
+
+// -----------------------------------------------------------------------------
+template <typename T>
+void Vector<T>::ConstIterator::operator++(int) { myData++; }
+
+// -----------------------------------------------------------------------------
+template <typename T>
+void Vector<T>::ConstIterator::operator--(int) { myData--; }
+
+// -----------------------------------------------------------------------------
+template <typename T>
+void Vector<T>::ConstIterator::operator+=(const std::size_t numIncrements)
+{
+    for (std::size_t i{}; i < numIncrements; ++i) { myData++; }
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+void Vector<T>::ConstIterator::operator-=(const std::size_t numIncrements)
+{
+    for (std::size_t i{}; i < numIncrements; ++i) { myData--; }
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+bool Vector<T>::ConstIterator::operator==(const ConstIterator& other) const
+{ 
+    return myData == other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+bool Vector<T>::ConstIterator::operator!=(const ConstIterator& other) const
+{ 
+    return myData != other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+bool Vector<T>::ConstIterator::operator>(const ConstIterator& other) const
+{ 
+    return myData > other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+bool Vector<T>::ConstIterator::operator<(const ConstIterator& other) const
+{ 
+    return myData < other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+bool Vector<T>::ConstIterator::operator>=(const ConstIterator& other) const
+{ 
+    return myData >= other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+bool Vector<T>::ConstIterator::operator<=(const ConstIterator& other) const
+{ 
+    return myData >= other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+const T& Vector<T>::ConstIterator::operator*() const { return *myData; }
+
+// -----------------------------------------------------------------------------
+template <typename T>
+const T* Vector<T>::ConstIterator::operator=(ConstIterator& iterator) const 
+{ 
+    return myData; 
 }
 
 } // namespace container

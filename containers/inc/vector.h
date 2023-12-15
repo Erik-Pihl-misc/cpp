@@ -7,7 +7,6 @@
 
 namespace container 
 {
-
 /********************************************************************************
  * @brief Class for implementation of dynamic vectors.
  * 
@@ -17,6 +16,9 @@ template <typename T>
 class Vector 
 {
 public:
+    class Iterator;
+    class ConstIterator;
+
     /********************************************************************************
      * @brief Creates empty vector.
      ********************************************************************************/
@@ -113,7 +115,6 @@ public:
      ********************************************************************************/
     void operator+=(const Vector<T>& source);
 
-public:
     /********************************************************************************
      * @brief Provides the data held by the vector.
      *
@@ -140,28 +141,28 @@ public:
      *
      * @return Pointer to the first element of the vector.
      ********************************************************************************/
-    T* begin();
+    Iterator begin();
 
     /********************************************************************************
      * @brief Provides the start address of the vector.
      *
      * @return Pointer to the first element of the vector.
      ********************************************************************************/
-    const T* begin() const;
+    ConstIterator begin() const;
 
     /********************************************************************************
      * @brief Provides the end address of the vector.
      *
      * @return Pointer to the address after the last element of the vector.
      ********************************************************************************/
-    T* end();
+    Iterator end();
 
     /********************************************************************************
      * @brief Provides the end address of the vector.
      *
      * @return Pointer to the address after the last element of the vector.
      ********************************************************************************/
-    const T* end() const;
+    ConstIterator end() const;
 
     /********************************************************************************
      * @brief Returns the address of the last element of the vector.
@@ -220,6 +221,308 @@ private:
 
     T* myData{nullptr}; 
     std::size_t mySize{};  
+};
+
+/********************************************************************************
+ * @brief Implementation of mutable vector iterators.
+ *
+ * @tparam T The data type of the vector.
+ ********************************************************************************/
+template <typename T>
+class Vector<T>::Iterator
+{
+public:
+    /********************************************************************************
+     * @brief Creates empty iterator.
+     ********************************************************************************/
+    Iterator();
+
+    /********************************************************************************
+     * @brief Creates iterator pointing at referenced data.
+     *
+     * @param data Reference to data the iterator is set to point at.
+     ********************************************************************************/
+    Iterator(T& data);
+
+    /********************************************************************************
+     * @brief Creates iterator pointing at referenced data.
+     *
+     * @param data Reference to data the iterator is set to point at.
+     ********************************************************************************/
+    Iterator(T* data);
+
+    /********************************************************************************
+     * @brief Increments the address the iterator is pointing at (prefix operator).
+     ********************************************************************************/
+    void operator++();
+
+    /********************************************************************************
+     * @brief Decrements the address the iterator is pointing at (prefix operator).
+     ********************************************************************************/
+    void operator--();
+
+    /********************************************************************************
+     * @brief Increments the address the iterator is pointing at (postfix operator).
+     ********************************************************************************/
+    void operator++(int);
+
+    /********************************************************************************
+     * @brief Decrements the address the iterator is pointing at (postfix operator).
+     ********************************************************************************/
+    void operator--(int);
+
+    /********************************************************************************
+     * @brief Increments the iterator specified number of times.
+     *
+     * @param numIncrements The number of times the iterator will be incremented.
+     ********************************************************************************/
+    void operator+=(const std::size_t numIncrements);
+
+    /********************************************************************************
+     * @brief Decrements the iterator specified number of times.
+     *
+     * @param numIncrements The number of times the iterator will be decremented.
+     ********************************************************************************/
+    void operator-=(const std::size_t numIncrements);
+
+    /********************************************************************************
+     * @brief Indicates if the iterator and referenced other iterator point at the
+     *        same address.
+     *
+     * @param other Reference to other iterator.
+     * 
+     * @return True if the iterators point at the same address, else false.
+     ********************************************************************************/
+    bool operator==(const Iterator& other) const;
+
+    /********************************************************************************
+     * @brief Indicates if the iterator and referenced other iterator point at
+     *        different addresses.
+     *
+     * @param other Reference to other iterator.
+     * 
+     * @return True if the iterators point at the different addresses, else false.
+     ********************************************************************************/
+    bool operator!=(const Iterator& other) const;
+
+    /********************************************************************************
+     * @brief Indicates if the iterator points at an address that's higher than
+     *        the address pointed to by referenced other iterator.
+     *
+     * @param other Reference to other iterator.
+     * 
+     * @return True if iterator points at an address that's higher than the address
+     *         pointed to by referenced other iterator, else false.
+     ********************************************************************************/
+    bool operator>(const Iterator& other) const;
+
+    /********************************************************************************
+     * @brief Indicates if the iterator points at an address that's lower than
+     *        the address pointed to by referenced other iterator.
+     *
+     * @param other Reference to other iterator.
+     * 
+     * @return True if iterator points at an address that's lower than the address
+     *         pointed to by referenced other iterator, else false.
+     ********************************************************************************/
+    bool operator<(const Iterator& other) const;
+
+    /********************************************************************************
+     * @brief Indicates if the iterator points at an address that's higher or equal
+     *        to the address pointed to by referenced other iterator.
+     *
+     * @param other Reference to other iterator.
+     * 
+     * @return True if iterator points at an address that's higher or equal to the
+     *         address pointed to by referenced other iterator, else false.
+     ********************************************************************************/
+    bool operator>=(const Iterator& other) const;
+
+    /********************************************************************************
+     * @brief Indicates if the iterator points at an address that's lower or equal
+     *        to the address pointed to by referenced other iterator.
+     *
+     * @param other Reference to other iterator.
+     * 
+     * @return True if iterator points at an address that's lower or equal to the
+     *         address pointed to by referenced other iterator, else false.
+     ********************************************************************************/
+    bool operator<=(const Iterator& other) const;
+
+    /********************************************************************************
+     * @brief Provides the value stored at the address the iterator is pointing at.
+     *
+     * @return Reference to the value at the address the iterator is pointing at.
+     ********************************************************************************/
+    T& operator*();
+
+    /********************************************************************************
+     * @brief Provides the value stored at the address the iterator is pointing at.
+     *
+     * @return Reference to the value at the address the iterator is pointing at.
+     ********************************************************************************/
+    const T& operator*() const;
+
+    /********************************************************************************
+     * @brief Provides the address the iterator i pointing at.
+     *
+     * @return A pointer to the address the iterator is pointing at.
+     ********************************************************************************/
+    T* operator=(Iterator& iterator);
+
+    /********************************************************************************
+     * @brief Provides the address the iterator i pointing at.
+     *
+     * @return A pointer to the address the iterator is pointing at.
+     ********************************************************************************/
+    const T* operator=(Iterator& iterator) const;
+
+private:
+    T* myData{nullptr};
+};
+
+/********************************************************************************
+ * @brief Implementation of constant vector iterators.
+ *
+ * @tparam T The data type of the vector.
+ ********************************************************************************/
+template <typename T>
+class Vector<T>::ConstIterator
+{
+public:
+    /********************************************************************************
+     * @brief Creates empty iterator.
+     ********************************************************************************/
+    ConstIterator();
+
+    /********************************************************************************
+     * @brief Creates iterator pointing at referenced data.
+     *
+     * @param data Reference to data the iterator is set to point at.
+     ********************************************************************************/
+    ConstIterator(const T& data);
+
+    /********************************************************************************
+     * @brief Creates iterator pointing at referenced data.
+     *
+     * @param data Reference to data the iterator is set to point at.
+     ********************************************************************************/
+    ConstIterator(const T* data);
+
+    /********************************************************************************
+     * @brief Increments the address the iterator is pointing at (prefix operator).
+     ********************************************************************************/
+    void operator++();
+
+    /********************************************************************************
+     * @brief Decrements the address the iterator is pointing at (prefix operator).
+     ********************************************************************************/
+    void operator--();
+
+    /********************************************************************************
+     * @brief Increments the address the iterator is pointing at (postfix operator).
+     ********************************************************************************/
+    void operator++(int);
+
+    /********************************************************************************
+     * @brief Decrements the address the iterator is pointing at (postfix operator).
+     ********************************************************************************/
+    void operator--(int);
+
+    /********************************************************************************
+     * @brief Increments the iterator specified number of times.
+     *
+     * @param numIncrements The number of times the iterator will be incremented.
+     ********************************************************************************/
+    void operator+=(const std::size_t numIncrements);
+
+    /********************************************************************************
+     * @brief Decrements the iterator specified number of times.
+     *
+     * @param numIncrements The number of times the iterator will be decremented.
+     ********************************************************************************/
+    void operator-=(const std::size_t numIncrements);
+
+    /********************************************************************************
+     * @brief Indicates if the iterator and referenced other iterator point at the
+     *        same address.
+     *
+     * @param other Reference to other iterator.
+     * 
+     * @return True if the iterators point at the same address, else false.
+     ********************************************************************************/
+    bool operator==(const ConstIterator& other) const;
+
+    /********************************************************************************
+     * @brief Indicates if the iterator and referenced other iterator point at
+     *        different addresses.
+     *
+     * @param other Reference to other iterator.
+     * 
+     * @return True if the iterators point at the different addresses, else false.
+     ********************************************************************************/
+    bool operator!=(const ConstIterator& other) const;
+
+    /********************************************************************************
+     * @brief Indicates if the iterator points at an address that's higher than
+     *        the address pointed to by referenced other iterator.
+     *
+     * @param other Reference to other iterator.
+     * 
+     * @return True if iterator points at an address that's higher than the address
+     *         pointed to by referenced other iterator, else false.
+     ********************************************************************************/
+    bool operator>(const ConstIterator& other) const;
+
+    /********************************************************************************
+     * @brief Indicates if the iterator points at an address that's lower than
+     *        the address pointed to by referenced other iterator.
+     *
+     * @param other Reference to other iterator.
+     * 
+     * @return True if iterator points at an address that's lower than the address
+     *         pointed to by referenced other iterator, else false.
+     ********************************************************************************/
+    bool operator<(const ConstIterator& other) const;
+
+    /********************************************************************************
+     * @brief Indicates if the iterator points at an address that's higher or equal
+     *        to the address pointed to by referenced other iterator.
+     *
+     * @param other Reference to other iterator.
+     * 
+     * @return True if iterator points at an address that's higher or equal to the
+     *         address pointed to by referenced other iterator, else false.
+     ********************************************************************************/
+    bool operator>=(const ConstIterator& other) const;
+
+    /********************************************************************************
+     * @brief Indicates if the iterator points at an address that's lower or equal
+     *        to the address pointed to by referenced other iterator.
+     *
+     * @param other Reference to other iterator.
+     * 
+     * @return True if iterator points at an address that's lower or equal to the
+     *         address pointed to by referenced other iterator, else false.
+     ********************************************************************************/
+    bool operator<=(const ConstIterator& other) const;
+
+    /********************************************************************************
+     * @brief Provides the value stored at the address the iterator is pointing at.
+     *
+     * @return Reference to the value at the address the iterator is pointing at.
+     ********************************************************************************/
+    const T& operator*() const;
+
+    /********************************************************************************
+     * @brief Provides the address the iterator i pointing at.
+     *
+     * @return A pointer to the address the iterator is pointing at.
+     ********************************************************************************/
+    const T* operator=(ConstIterator& iterator) const;
+
+private:
+    const T* myData{nullptr};
 };
 
 } // namespace container
