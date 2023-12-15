@@ -139,28 +139,28 @@ public:
     /********************************************************************************
      * @brief Provides the start address of the vector.
      *
-     * @return Pointer to the first element of the vector.
+     * @return Iterator pointing at the first element of the vector.
      ********************************************************************************/
     Iterator begin();
 
     /********************************************************************************
      * @brief Provides the start address of the vector.
      *
-     * @return Pointer to the first element of the vector.
+     * @return Iterator pointing at the first element of the vector.
      ********************************************************************************/
     ConstIterator begin() const;
 
     /********************************************************************************
      * @brief Provides the end address of the vector.
      *
-     * @return Pointer to the address after the last element of the vector.
+     * @return Iterator pointing at the address after the last element of the vector.
      ********************************************************************************/
     Iterator end();
 
     /********************************************************************************
      * @brief Provides the end address of the vector.
      *
-     * @return Pointer to the address after the last element of the vector.
+     * @return Iterator pointing at the address after the last element of the vector.
      ********************************************************************************/
     ConstIterator end() const;
 
