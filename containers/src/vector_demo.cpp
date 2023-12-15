@@ -4,7 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <type_traits>
-#include <vector.hpp>
+#include <vector.h>
 
 namespace {
 
@@ -13,16 +13,16 @@ namespace {
  * 
  * @tparam T The data type of the vector.
  * 
- * @param vector       Reference to vector holding the data to print.
- * @param ostream      Output stream to print to (default = the terminal).
- * @param num_decimals The number of decimals to print (default = 1).
+ * @param vector      Reference to vector holding the data to print.
+ * @param ostream     Output stream to print to (default = the terminal).
+ * @param numDecimals The number of decimals to print (default = 1).
  ********************************************************************************/
 template <typename T>
 void printNumbers(const container::Vector<T>& vector,
                   std::ostream& ostream = std::cout, 
-                  const std::size_t num_decimals = 1) {
+                  const std::size_t numDecimals = 1) {
     static_assert(std::is_arithmetic<T>::value, "Invalid vector type for printing numbers!");
-    ostream << std::fixed << std::setprecision(num_decimals);
+    ostream << std::fixed << std::setprecision(numDecimals);
     ostream << "--------------------------------------------------------------------------------\n";
     for (const auto& i : vector) {
         ostream << i << "\n";
@@ -32,12 +32,13 @@ void printNumbers(const container::Vector<T>& vector,
 } /* namespace */
 
 /********************************************************************************
- * @brief Creates a vector holding 16 integers in the range 0 - 15 and an 
- *        vector holding five floating-point numbers in the range 0.5 - 2.5.
+ * @brief Creates a vector holding 16 integers in the range 0 - 15 and a vector
+ *        holding five floating-point numbers in the range 0.5 - 2.5.
  *        The content held by each vector is printed in the terminal before 
  *        terminating the program.
  ********************************************************************************/
-int main(void) {
+int main() 
+{
     container::Vector<int> v1{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     container::Vector<double> v2{};
     double num{};
