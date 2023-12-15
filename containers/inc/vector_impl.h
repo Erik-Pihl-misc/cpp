@@ -130,7 +130,6 @@ typename Vector<T>::ConstIterator Vector<T>::rbegin() const
     return mySize > 0 ? ConstIterator{myData + mySize - 1} : ConstIterator{nullptr}; 
 }
 
-
 // -----------------------------------------------------------------------------
 template <typename T>
 typename Vector<T>::Iterator Vector<T>::rend() 
