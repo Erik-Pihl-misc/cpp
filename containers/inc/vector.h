@@ -139,56 +139,56 @@ public:
     /********************************************************************************
      * @brief Provides the start address of the vector.
      *
-     * @return Iterator pointing at the first element of the vector.
+     * @return Iterator pointing at the start address of the the vector.
      ********************************************************************************/
     Iterator begin();
 
     /********************************************************************************
      * @brief Provides the start address of the vector.
      *
-     * @return Iterator pointing at the first element of the vector.
+     * @return Iterator pointing at the start address of the the vector.
      ********************************************************************************/
     ConstIterator begin() const;
 
     /********************************************************************************
      * @brief Provides the end address of the vector.
      *
-     * @return Iterator pointing at the address after the last element of the vector.
+     * @return Iterator pointing at the end address of the the vector.
      ********************************************************************************/
     Iterator end();
 
     /********************************************************************************
      * @brief Provides the end address of the vector.
      *
-     * @return Iterator pointing at the address after the last element of the vector.
+     * @return Iterator pointing at the end address of the the vector.
      ********************************************************************************/
     ConstIterator end() const;
 
     /********************************************************************************
-     * @brief Provides the address of the last element of the vector.
+     * @brief Provides the reverse start address of the the vector.
      *
-     * @return Iterator pointing at the last element of the vector.
+     * @return Iterator pointing at the reverse start address of the the vector.
      ********************************************************************************/
     Iterator rbegin();
 
     /********************************************************************************
-     * @brief Provides the address of the last element of the vector.
+     * @brief Provides the reverse start address of the the vector.
      *
-     * @return Iterator pointing at the last element of the vector.
+     * @return Iterator pointing at the reverse start address of the the vector.
      ********************************************************************************/
     ConstIterator rbegin() const;
 
     /********************************************************************************
-     * @brief Provides the address of the first element of the vector.
+     * @brief Provides the reverse end address of the the vector.
      *
-     * @return Iterator pointing at the first element of the vector.
+     * @return Iterator pointing at the reverse end address of the the vector.
      ********************************************************************************/
     Iterator rend();
 
     /********************************************************************************
-     * @brief Provides the address of the first element of the vector.
+     * @brief Provides the reverse end address of the the vector.
      *
-     * @return Iterator pointing at the first element of the vector.
+     * @return Iterator pointing at the reverse end address of the the vector.
      ********************************************************************************/
     ConstIterator rend() const;
 

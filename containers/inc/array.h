@@ -172,30 +172,30 @@ public:
     const T* end() const;
 
     /********************************************************************************
-     * @brief Returns the address of the last element of the array.
+     * @brief Provides the reverse start address of the the array.
      *
-     * @return Pointer to the last element of the array.
+     * @return Iterator pointing at the reverse start address of the the array.
      ********************************************************************************/
     T* rbegin();
 
-   /********************************************************************************
-     * @brief Returns the address of the last element of the array.
+    /********************************************************************************
+     * @brief Provides the reverse start address of the the array.
      *
-     * @return Pointer to the last element of the array.
+     * @return Iterator pointing at the reverse start address of the the array.
      ********************************************************************************/
     const T* rbegin() const;
 
     /********************************************************************************
-     * @brief Provides the start address of the array.
+     * @brief Provides the reverse end address of the the array.
      *
-     * @return Pointer to the first element of the array.
+     * @return Iterator pointing at the reverse end address of the the array.
      ********************************************************************************/
     T* rend();
 
     /********************************************************************************
-     * @brief Provides the start address of the array.
+     * @brief Provides the reverse end address of the the array.
      *
-     * @return Pointer to the first element of the array.
+     * @return Iterator pointing at the reverse end address of the the array.
      ********************************************************************************/
     const T* rend() const;
 
