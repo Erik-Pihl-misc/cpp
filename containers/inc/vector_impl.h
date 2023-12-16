@@ -156,7 +156,7 @@ const T* Vector<T>::last() const { return mySize > 0 ? end() - 1 : nullptr; }
 template <typename T>
 void Vector<T>::clear() 
 {
-    std::free(myData);
+    if (myData != nullptr) { delete[] myData; }
     myData = nullptr;
     mySize = 0;
 }
@@ -165,7 +165,7 @@ void Vector<T>::clear()
 template <typename T>
 bool Vector<T>::resize(const std::size_t newSize) 
 {
-    auto copy{static_cast<T*>(std::realloc(myData, sizeof(T) * newSize))};
+    auto copy{realloc(newSize)};
     if (copy == nullptr) { return false; }
     myData = copy;
     mySize = newSize;
@@ -258,6 +258,22 @@ bool Vector<T>::addValues(const T (&values)[NumValues])
     if (!resize(mySize + NumValues)) { return false; }
     assign(values, offset);
     return true;
+}
+
+// -----------------------------------------------------------------------------
+template <typename T>
+T* Vector<T>::realloc(const std::size_t newSize)
+{
+    auto copy{new T[newSize]};
+    if (copy == nullptr) { return nullptr; }
+   
+    for (std::size_t i{}; i < mySize && i < newSize; ++i)
+    {
+        copy[i] = myData[i];
+    }
+
+    if (myData != nullptr) { delete[] myData; }
+    return copy;
 }
 
 // -----------------------------------------------------------------------------

@@ -7,7 +7,6 @@
 
 namespace container 
 {
-
 /********************************************************************************
  * @brief Class for implementation of doubly linked lists.
  * 

@@ -3,7 +3,7 @@
  ********************************************************************************/
 #pragma once
 
-#include <cstdlib>
+#include <cstddef>
 
 namespace container 
 {
@@ -246,6 +246,7 @@ private:
     bool addValues(const Vector<T>& source);
     template <std::size_t NumValues>
     bool addValues(const T (&values)[NumValues]);
+    T* realloc(const std::size_t newSize);
 
     T* myData{nullptr}; 
     std::size_t mySize{};  
