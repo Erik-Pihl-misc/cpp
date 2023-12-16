@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <type_traits>
+
 #include <list.h>
 
 namespace 
@@ -25,12 +26,13 @@ void printNumbers(const container::List<T>& list,
     static_assert(std::is_arithmetic<T>::value, "Invalid list type for printing numbers!");
     ostream << std::fixed << std::setprecision(numDecimals);
     ostream << "--------------------------------------------------------------------------------\n";
-    for (const auto& i : list) {
+    for (const auto& i : list) 
+    {
         ostream << i << "\n";
     }
     ostream << "--------------------------------------------------------------------------------\n\n";
 }
-} /* namespace */
+} // namespace
 
 /********************************************************************************
  * @brief Creates a list holding 16 integers in the range 0 - 15 and a list
