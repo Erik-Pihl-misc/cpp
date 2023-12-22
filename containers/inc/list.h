@@ -340,8 +340,7 @@ public:
     /********************************************************************************
      * @brief Creates iterator pointing at referenced node.
      *
-     * @param node
-     *        Pointer to node that the iterator is set to point at.
+     * @param node Pointer to node that the iterator is set to point at.
      ********************************************************************************/
     ConstIterator(const Node* node);
 
@@ -368,8 +367,7 @@ public:
     /********************************************************************************
      * @brief Addition operator, increments the iterator specified number of times.
      *
-     * @param numIncrements
-     *        The number of times the iterator will be incremented.
+     * @param numIncrements The number of times the iterator will be incremented.
      ********************************************************************************/
     void operator+=(const std::size_t numIncrements);
 
@@ -377,8 +375,7 @@ public:
      * @brief Subtraction operator, decrements the iterator specified number of 
      *        times.
      *
-     * @param numIncrements
-     *        The number of times the iterator will be decremented.
+     * @param numIncrements The number of times the iterator will be decremented.
      ********************************************************************************/
     void operator-=(const std::size_t numIncrements);
 
@@ -386,10 +383,9 @@ public:
      * @brief Equality operator, checks if the iterator points at the same node as
      *        referenced other iterator.
      *
-     * @param other
-     *        Reference to other iterator.
-     * @return 
-     *        True if the iterators point at the same node, else false.
+     * @param other Reference to other iterator.
+     * 
+     * @return True if the iterators point at the same node, else false.
      ********************************************************************************/
     bool operator==(ConstIterator& other) const;
 
@@ -397,10 +393,9 @@ public:
      * @brief Inequality operator, checks if the iterator and referenced other
      *        iterator points at different nodes.
      *
-     * @param other
-     *        Reference to other iterator.
-     * @return 
-     *        True if the iterators point at different nodes, else false.
+     * @param other Reference to other iterator.
+     * 
+     * @return True if the iterators point at different nodes, else false.
      ********************************************************************************/
     bool operator!=(ConstIterator& other) const;
 
@@ -408,8 +403,7 @@ public:
      * @brief Dereference operator, provides a reference to the value stored by the
      *        node the iterator is pointing at. Not
      *
-     * @return 
-     *        Reference to the value stored by the node the iterator is pointing at.
+     * @return Reference to the value stored by the node the iterator is pointing at.
      ********************************************************************************/
     const T& operator*() const;
     
