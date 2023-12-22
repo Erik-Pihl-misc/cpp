@@ -204,7 +204,7 @@ public:
      ********************************************************************************/
     void clear();
 
-private:
+protected:
     static_assert(Size > 0, "Static array size cannot be set to 0!");
 
     template <typename... Values>

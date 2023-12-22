@@ -215,7 +215,7 @@ public:
      ********************************************************************************/
     bool remove(Iterator& iterator);
 
-private:
+protected:
     struct Node;
 
     template <typename... Values>
@@ -320,8 +320,7 @@ public:
      *        is returned to keep information about nodes private within the List 
      *        class.
      *
-     * @return 
-     *        Pointer to the node the iterator is pointing at.
+     * @return Pointer to the node the iterator is pointing at.
      ********************************************************************************/
     void* address();
 

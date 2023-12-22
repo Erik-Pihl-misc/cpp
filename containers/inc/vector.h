@@ -236,7 +236,7 @@ public:
      ********************************************************************************/
     bool popBack();
 
-private:
+protected:
     bool copy(const Vector<T>& source);
     template <typename... Values>
     void assign(const std::size_t offset, const Values&&... values);
