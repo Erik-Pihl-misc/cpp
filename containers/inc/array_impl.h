@@ -90,35 +90,56 @@ std::size_t Array<T, Size>::size() const { return Size; }
 
 // -----------------------------------------------------------------------------
 template <typename T, std::size_t Size>
-T* Array<T, Size>::begin() { return myData; }
+typename Array<T, Size>::Iterator Array<T, Size>::begin() { return Iterator{myData}; }
 
 // -----------------------------------------------------------------------------
 template <typename T, std::size_t Size>
-const T* Array<T, Size>::begin() const { return myData; }
+typename Array<T, Size>::ConstIterator Array<T, Size>::begin() const 
+{ 
+    return ConstIterator{myData};
+}
 
 // -----------------------------------------------------------------------------
 template <typename T, std::size_t Size>
-T* Array<T, Size>::end() { return myData + Size; }
+typename Array<T, Size>::Iterator Array<T, Size>::end() 
+{ 
+    return Iterator{myData + Size}; 
+}
 
 // -----------------------------------------------------------------------------
 template <typename T, std::size_t Size>
-const T* Array<T, Size>::end() const { return myData + Size; }
+typename Array<T, Size>::ConstIterator Array<T, Size>::end() const 
+{ 
+    return ConstIterator{myData + Size};
+}
 
 // -----------------------------------------------------------------------------
 template <typename T, std::size_t Size>
-T* Array<T, Size>::rbegin() { return end() - 1; }
+typename Array<T, Size>::Iterator Array<T, Size>::rbegin() 
+{ 
+    return Iterator{myData + Size - 1};
+}
 
 // -----------------------------------------------------------------------------
 template <typename T, std::size_t Size>
-const T* Array<T, Size>::rbegin() const { return end() - 1; }
+typename Array<T, Size>::ConstIterator Array<T, Size>::rbegin() const 
+{ 
+    return ConstIterator{myData + Size - 1};
+}
 
 // -----------------------------------------------------------------------------
 template <typename T, std::size_t Size>
-T* Array<T, Size>::rend() { return myData; }
+typename Array<T, Size>::Iterator Array<T, Size>::rend() 
+{ 
+    return Iterator{myData - 1};
+}
 
 // -----------------------------------------------------------------------------
 template <typename T, std::size_t Size>
-const T* Array<T, Size>::rend() const { return myData; }
+typename Array<T, Size>::ConstIterator Array<T, Size>::rend() const 
+{ 
+    return ConstIterator{myData - 1};
+}
 
 // -----------------------------------------------------------------------------
 template <typename T, std::size_t Size>
@@ -162,6 +183,201 @@ void Array<T, Size>::copy(const Array<T, NumValues>& source, const std::size_t o
     {
         myData[offset + i] = source[i];
     }
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+Array<T, Size>::Iterator::Iterator() = default;
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+Array<T, Size>::Iterator::Iterator(T& data) : myData{&data} {}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+Array<T, Size>::Iterator::Iterator(T* data) : myData{data} {}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+void Array<T, Size>::Iterator::operator++() { myData++; }
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+void Array<T, Size>::Iterator::operator--() { myData--; }
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+void Array<T, Size>::Iterator::operator++(int) { myData++; }
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+void Array<T, Size>::Iterator::operator--(int) { myData--; }
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+void Array<T, Size>::Iterator::operator+=(const std::size_t numIncrements)
+{
+    for (std::size_t i{}; i < numIncrements; ++i) { myData++; }
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+void Array<T, Size>::Iterator::operator-=(const std::size_t numIncrements)
+{
+    for (std::size_t i{}; i < numIncrements; ++i) { myData--; }
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+bool Array<T, Size>::Iterator::operator==(const Iterator& other) const
+{ 
+    return myData == other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+bool Array<T, Size>::Iterator::operator!=(const Iterator& other) const
+{ 
+    return myData != other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+bool Array<T, Size>::Iterator::operator>(const Iterator& other) const
+{ 
+    return myData > other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+bool Array<T, Size>::Iterator::operator<(const Iterator& other) const
+{ 
+    return myData < other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+bool Array<T, Size>::Iterator::operator>=(const Iterator& other) const
+{ 
+    return myData >= other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+bool Array<T, Size>::Iterator::operator<=(const Iterator& other) const
+{ 
+    return myData >= other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+T& Array<T, Size>::Iterator::operator*() { return *myData; }
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+const T& Array<T, Size>::Iterator::operator*() const { return *myData; }
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+T* Array<T, Size>::Iterator::operator=(Iterator& iterator) { return myData; }
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+const T* Array<T, Size>::Iterator::operator=(Iterator& iterator) const { return myData; }
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+Array<T, Size>::ConstIterator::ConstIterator() = default;
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+Array<T, Size>::ConstIterator::ConstIterator(const T& data) : myData{&data} {}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+Array<T, Size>::ConstIterator::ConstIterator(const T* data) : myData{data} {}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+void Array<T, Size>::ConstIterator::operator++() { myData++; }
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+void Array<T, Size>::ConstIterator::operator--() { myData--; }
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+void Array<T, Size>::ConstIterator::operator++(int) { myData++; }
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+void Array<T, Size>::ConstIterator::operator--(int) { myData--; }
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+void Array<T, Size>::ConstIterator::operator+=(const std::size_t numIncrements)
+{
+    for (std::size_t i{}; i < numIncrements; ++i) { myData++; }
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+void Array<T, Size>::ConstIterator::operator-=(const std::size_t numIncrements)
+{
+    for (std::size_t i{}; i < numIncrements; ++i) { myData--; }
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+bool Array<T, Size>::ConstIterator::operator==(const ConstIterator& other) const
+{ 
+    return myData == other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+bool Array<T, Size>::ConstIterator::operator!=(const ConstIterator& other) const
+{ 
+    return myData != other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+bool Array<T, Size>::ConstIterator::operator>(const ConstIterator& other) const
+{ 
+    return myData > other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+bool Array<T, Size>::ConstIterator::operator<(const ConstIterator& other) const
+{ 
+    return myData < other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+bool Array<T, Size>::ConstIterator::operator>=(const ConstIterator& other) const
+{ 
+    return myData >= other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+bool Array<T, Size>::ConstIterator::operator<=(const ConstIterator& other) const
+{ 
+    return myData >= other.myData; 
+}
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+const T& Array<T, Size>::ConstIterator::operator*() const { return *myData; }
+
+// -----------------------------------------------------------------------------
+template <typename T, std::size_t Size>
+const T* Array<T, Size>::ConstIterator::operator=(ConstIterator& iterator) const 
+{ 
+    return myData; 
 }
 
 } // namespace container

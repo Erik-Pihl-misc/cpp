@@ -146,14 +146,6 @@ typename Vector<T>::ConstIterator Vector<T>::rend() const
 
 // -----------------------------------------------------------------------------
 template <typename T>
-T* Vector<T>::last() { return mySize > 0 ? end() - 1 : nullptr; }
-
-// -----------------------------------------------------------------------------
-template <typename T>
-const T* Vector<T>::last() const { return mySize > 0 ? end() - 1 : nullptr; }
-
-// -----------------------------------------------------------------------------
-template <typename T>
 void Vector<T>::clear() 
 {
     if (myData != nullptr) { delete[] myData; }

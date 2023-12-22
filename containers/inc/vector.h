@@ -193,20 +193,6 @@ public:
     ConstIterator rend() const;
 
     /********************************************************************************
-     * @brief Returns the address of the last element of the vector.
-     *
-     * @return Pointer to the last element of the vector.
-     ********************************************************************************/
-    T* last();
-   
-    /********************************************************************************
-     * @brief Returns the address of the last element of the vector.
-     *
-     * @return Pointer to the last element of the vector.
-     ********************************************************************************/
-    const T* last() const;
-
-    /********************************************************************************
      * @brief Clears content of the vector.
      ********************************************************************************/
     void clear();
@@ -393,14 +379,14 @@ public:
     const T& operator*() const;
 
     /********************************************************************************
-     * @brief Provides the address the iterator i pointing at.
+     * @brief Provides the address the iterator is pointing at.
      *
      * @return A pointer to the address the iterator is pointing at.
      ********************************************************************************/
     T* operator=(Iterator& iterator);
 
     /********************************************************************************
-     * @brief Provides the address the iterator i pointing at.
+     * @brief Provides the address the iterator is pointing at.
      *
      * @return A pointer to the address the iterator is pointing at.
      ********************************************************************************/
@@ -544,7 +530,7 @@ public:
     const T& operator*() const;
 
     /********************************************************************************
-     * @brief Provides the address the iterator i pointing at.
+     * @brief Provides the address the iterator is pointing at.
      *
      * @return A pointer to the address the iterator is pointing at.
      ********************************************************************************/
